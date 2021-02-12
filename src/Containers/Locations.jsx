@@ -1,29 +1,28 @@
 import React, { useState } from 'react';
-
 import ListGrid from 'Components/Shared/ListGrid';
 import PaginationBar from 'Components/Shared/PaginationBar';
 
-import CharacterFilters from 'Components/Characters/CharacterFilters';
-import CharacterCard from 'Components/Characters/CharacterCard';
+import LocationFilters from 'Components/Locations/LocationFilters';
+import LocationCard from 'Components/Locations/LocationCard';
 
 import useFormControl from 'Hooks/useFormControl';
 import useFetch from 'Hooks/useFetch';
 
-import { getCharacters } from 'Utils/Requester';
+import { getLocations } from 'Utils/Requester';
 import Loading from 'Components/Shared/Loading';
 
-function Characters() {
+
+function Episodes() {
   // Esta es la sección de la variable de estado Page y sus funciones
   const [page, setPage] = useState(1);
   const [click, setClick] = useState(true);
   const [filters, handleChange, handleSubmit] = useFormControl({
     name: '',
-    status: '',
-    species: '',
-    gender: '',
+    type: '',
+    dimension: '',
   });
   const { data, loading, error } = useFetch(
-    () => getCharacters({ page, ...filters }),
+    () => getLocations({ page, ...filters }),
     [click,page] // Dependencias, al cambiar la variable de estado "page", se vuelve a hacer una nueva petición
   );
 
@@ -34,7 +33,7 @@ function Characters() {
 
   return (
     <>
-      <CharacterFilters
+      <LocationFilters
         readOnly={loading}
         inputs={filters}
         onChange={handleChange}
@@ -53,11 +52,11 @@ function Characters() {
       ) : (
         <ListGrid>
           {data.results.map(item => (
-            <CharacterCard key={item.id} {...item} />
+            <LocationCard key={item.id} {...item} />
           ))}
         </ListGrid>
       )}
     </>
   );
 }
-export default Characters;
+export default Episodes;

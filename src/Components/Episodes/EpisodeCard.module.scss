@@ -1,0 +1,18 @@
+.cardImg{
+    opacity: 0.6;
+    height: 100%;
+}
+
+.cardBody{
+    background-color: rgba($color: #000000, $alpha: 0.6);
+}
+
+.cardTitle{
+    -webkit-text-stroke: 1px #fffdfd;
+    color: white;
+}
+
+.cardButton{
+    position: absolute;
+    bottom: 50px;
+}

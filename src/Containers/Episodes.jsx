@@ -1,29 +1,27 @@
 import React, { useState } from 'react';
-
 import ListGrid from 'Components/Shared/ListGrid';
 import PaginationBar from 'Components/Shared/PaginationBar';
 
-import CharacterFilters from 'Components/Characters/CharacterFilters';
-import CharacterCard from 'Components/Characters/CharacterCard';
+import EpisodeFilters from 'Components/Episodes/EpisodeFilters';
+import EpisodeCard from 'Components/Episodes/EpisodeCard';
 
 import useFormControl from 'Hooks/useFormControl';
 import useFetch from 'Hooks/useFetch';
 
-import { getCharacters } from 'Utils/Requester';
+import { getEpisodes } from 'Utils/Requester';
 import Loading from 'Components/Shared/Loading';
 
-function Characters() {
+
+function Episodes() {
   // Esta es la sección de la variable de estado Page y sus funciones
   const [page, setPage] = useState(1);
   const [click, setClick] = useState(true);
   const [filters, handleChange, handleSubmit] = useFormControl({
     name: '',
-    status: '',
-    species: '',
-    gender: '',
+    episode: '',
   });
   const { data, loading, error } = useFetch(
-    () => getCharacters({ page, ...filters }),
+    () => getEpisodes({ page, ...filters }),
     [click,page] // Dependencias, al cambiar la variable de estado "page", se vuelve a hacer una nueva petición
   );
 
@@ -34,7 +32,7 @@ function Characters() {
 
   return (
     <>
-      <CharacterFilters
+      <EpisodeFilters
         readOnly={loading}
         inputs={filters}
         onChange={handleChange}
@@ -53,11 +51,11 @@ function Characters() {
       ) : (
         <ListGrid>
           {data.results.map(item => (
-            <CharacterCard key={item.id} {...item} />
+            <EpisodeCard key={item.id} {...item} />
           ))}
         </ListGrid>
       )}
     </>
   );
 }
-export default Characters;
+export default Episodes;
