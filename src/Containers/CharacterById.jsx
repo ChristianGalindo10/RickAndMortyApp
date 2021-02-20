@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from 'react-router-dom';
 import useFetch from "Hooks/useFetch";
 import Episodes from 'Containers/Episodes';
 import { getEndNumber } from "../Utils/URLTools";
@@ -36,7 +36,7 @@ function CharacterById({ id }) {
                 {data.type != "" && <li>Type: {data.type}</li>}
                 <li>Gender: {data.gender}</li>
                 <li>Origin: {data.origin.name}</li>
-                <li>Location:<a href={`/locations/${getEndNumber(data.location.url)}`}> {data.location.name}</a></li>
+                <li>Location:<Link to={`/locations/${getEndNumber(data.location.url)}`} activeClassName="active">{data.location.name}</Link></li>
               </ul>
             </Card.Body>
             </div>
