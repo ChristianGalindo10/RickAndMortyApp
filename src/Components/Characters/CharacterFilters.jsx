@@ -54,7 +54,7 @@ function CharacterFilters({ inputs, onChange, onSubmit, readOnly = false }) {
         <option value="unknown">Unknown</option>
       </FormControl>
 
-      <Button type="submit" variant="secondary">
+      <Button type="submit" variant="dark">
         Search
       </Button>
     </Form>

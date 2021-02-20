@@ -21,7 +21,7 @@ function LocationCard({ id, name, type, dimension, residents = {} }) {
         <Card.Text>
           Dimension: {dimension}
         </Card.Text>
-        <Button variant="secondary" as={Link} to={`/characters/${id}`} className={`${styles.cardButton}`}>
+        <Button variant="info" as={Link} to={`/locations/${id}`} className={`${styles.cardButton}`}>
           Ver residentes
         </Button>
       </Card.ImgOverlay>

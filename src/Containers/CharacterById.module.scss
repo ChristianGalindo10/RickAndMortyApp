@@ -1,0 +1,16 @@
+.cardRow{
+    display: flex;
+    flex-direction: row;
+}
+
+.cardColumn{
+    width: 50%;
+}
+
+.cardColumn img{
+    height: fit-content;
+}
+
+li{
+    margin: 5px;
+}

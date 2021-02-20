@@ -7,7 +7,7 @@ function Layout({ children }) {
     <>
       <NavbarApp />
       <main>{children}</main>
-      <footer className="text-center p-3 bg-secondary text-white">
+      <footer className="text-center p-3 bg-info text-white" >
         Copyright © 2021
       </footer>
     </>

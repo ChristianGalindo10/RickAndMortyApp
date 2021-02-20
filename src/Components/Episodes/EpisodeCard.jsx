@@ -14,34 +14,11 @@ function EpisodeCard({ id, name, air_date, episode, characters = {} }) {
     var episodeName = episode.substr(1,2);
   return (
     <Card className="text-white">
-      {episodeName == "01" && (
-        <Card.Img
+      <Card.Img
           className={`${styles.cardImg}`}
-          src={seasonOne}
+          src={srcImage(episodeName)}
           alt="Card image"
         />
-      )}
-      {episodeName == "02" && (
-        <Card.Img
-          className={`${styles.cardImg}`}
-          src={seasonTwo}
-          alt="Card image"
-        />
-      )}
-      {episodeName == "03" && (
-        <Card.Img
-          className={`${styles.cardImg}`}
-          src={seasonThree}
-          alt="Card image"
-        />
-      )}
-      {episodeName == "04" && (
-        <Card.Img
-          className={`${styles.cardImg}`}
-          src={seasonFour}
-          alt="Card image"
-        />
-      )}
       <Card.ImgOverlay className={`${styles.cardBody}`}>
         <br></br>
         <Card.Title className={`${styles.cardTitle}`}>{name}</Card.Title>
@@ -49,12 +26,31 @@ function EpisodeCard({ id, name, air_date, episode, characters = {} }) {
         <Card.Text>
           Air Date: {air_date}
         </Card.Text>
-        <Button variant="secondary" as={Link} to={`/characters/${id}`} className={`${styles.cardButton}`}>
-          Ver personajes
+        <Button variant="info" as={Link} to={`/episodes/${id}`} className={`${styles.cardButton}`}>
+          See Characters
         </Button>
       </Card.ImgOverlay>
     </Card>
   );
+}
+
+function srcImage(episodeName){
+  switch (episodeName) {
+    case "01":
+      return seasonOne;
+      break;
+    case "02":
+      return seasonTwo;
+      break;
+    case "03":
+      return seasonThree;
+      break;
+    case "04":
+        return seasonFour;
+        break;  
+    default:
+      break;
+  }
 }
 
 export default EpisodeCard;

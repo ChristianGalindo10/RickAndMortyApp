@@ -9,30 +9,34 @@ import useFormControl from 'Hooks/useFormControl';
 import useFetch from 'Hooks/useFetch';
 
 import { getEpisodes } from 'Utils/Requester';
+import { getEpisodesByIds } from "Utils/Requester";
 import Loading from 'Components/Shared/Loading';
+import NotFound from "Pages/NotFound";
 
 
-function Episodes() {
+function Episodes({ids}) {
   // Esta es la sección de la variable de estado Page y sus funciones
   const [page, setPage] = useState(1);
-  const [click, setClick] = useState(true);
   const [filters, handleChange, handleSubmit] = useFormControl({
     name: '',
     episode: '',
   });
-  const { data, loading, error } = useFetch(
-    () => getEpisodes({ page, ...filters }),
-    [click,page] // Dependencias, al cambiar la variable de estado "page", se vuelve a hacer una nueva petición
+  const { data, loading, error, reFetch } = useFetch(
+    () => !ids ? getEpisodes({ page, ...filters }) : getEpisodesByIds(ids),
+    [page] // Dependencias, al cambiar la variable de estado "page", se vuelve a hacer una nueva petición
   );
 
   const resetPage = () => {
-    setPage(1); // Cambiar la viariable de estado "page"
-    setClick(!click);
+    if (page === 1) {
+      reFetch();
+    } else {
+      setPage(1);
+    }
   };
 
   return (
     <>
-      <EpisodeFilters
+      {!ids && (<><EpisodeFilters
         readOnly={loading}
         inputs={filters}
         onChange={handleChange}
@@ -43,18 +47,28 @@ function Episodes() {
         current={page}
         max={!(loading || error) ? +data.info.pages : 1}
         onChangePage={setPage}
-      />
+      /></>)}
       {loading ? (
         <Loading />
       ) : error ? (
-        <p>Ha ocurrido un error ({error.message})</p>
-      ) : (
+        <NotFound />
+      ) : Array.isArray(data) ? (
         <ListGrid>
-          {data.results.map(item => (
+          {data.map((item) => (
             <EpisodeCard key={item.id} {...item} />
           ))}
         </ListGrid>
-      )}
+      ) : data.hasOwnProperty("results") ? (
+        <ListGrid>
+          {data.results.map((item) => (
+            <EpisodeCard key={item.id} {...item} />
+          ))}
+        </ListGrid>
+      ) : (
+      <ListGrid>
+          <EpisodeCard key={data.id} {...data} />
+        </ListGrid>)
+      }
     </>
   );
 }

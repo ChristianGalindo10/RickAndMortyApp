@@ -34,3 +34,19 @@ export function getEpisodes(params) {
   const URL_PARAMS = new URLSearchParams(params);
   return RickApi.get(`episode?${URL_PARAMS}`);
 }
+
+export function getCharactersByIds(ids) {
+  return RickApi.get(`character/${ids}`);
+}
+
+export function getEpisodesByIds(ids) {
+  return RickApi.get(`episode/${ids}`);
+}
+
+export function getEpisodeById({ id = 0 }) {
+  return RickApi.get(`episode/${id}`);
+}
+
+export function getLocationById({ id = 0 }) {
+  return RickApi.get(`location/${id}`);
+}

@@ -10,25 +10,28 @@ import useFetch from 'Hooks/useFetch';
 
 import { getLocations } from 'Utils/Requester';
 import Loading from 'Components/Shared/Loading';
+import NotFound from "Pages/NotFound";
 
 
-function Episodes() {
+function Locations() {
   // Esta es la sección de la variable de estado Page y sus funciones
   const [page, setPage] = useState(1);
-  const [click, setClick] = useState(true);
   const [filters, handleChange, handleSubmit] = useFormControl({
     name: '',
     type: '',
     dimension: '',
   });
-  const { data, loading, error } = useFetch(
+  const { data, loading, error, reFetch } = useFetch(
     () => getLocations({ page, ...filters }),
-    [click,page] // Dependencias, al cambiar la variable de estado "page", se vuelve a hacer una nueva petición
+    [page] // Dependencias, al cambiar la variable de estado "page", se vuelve a hacer una nueva petición
   );
 
   const resetPage = () => {
-    setPage(1); // Cambiar la viariable de estado "page"
-    setClick(!click);
+    if (page === 1) {
+      reFetch();
+    } else {
+      setPage(1);
+    }
   };
 
   return (
@@ -48,15 +51,16 @@ function Episodes() {
       {loading ? (
         <Loading />
       ) : error ? (
-        <p>Ha ocurrido un error ({error.message})</p>
+        <NotFound />
       ) : (
         <ListGrid>
-          {data.results.map(item => (
+          {data.results.map((item) => (
             <LocationCard key={item.id} {...item} />
           ))}
         </ListGrid>
-      )}
+      ) 
+      }
     </>
   );
 }
-export default Episodes;
+export default Locations;

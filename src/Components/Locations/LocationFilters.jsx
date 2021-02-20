@@ -34,7 +34,7 @@ function LocationFilters({ inputs, onChange, onSubmit, readOnly = false }) {
         onChange={onChange}
       />
 
-      <Button type="submit" variant="secondary">
+      <Button type="submit" variant="dark">
         Search
       </Button>
     </Form>

@@ -6,6 +6,8 @@ import charactersBanner from "Assets/Images/charactersBanner.jpg";
 import episodesBanner from "Assets/Images/episodesBanner.jpg";
 import locationsBanner from "Assets/Images/locationsBanner.jpg";
 
+import styles from "./Home.module.scss";
+
 function Home() {
   usePageTitle("Home");
 
@@ -17,9 +19,11 @@ function Home() {
           src={charactersBanner}
           alt="First slide"
         />
-        <Carousel.Caption>
-          <h3>Characters</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        <Carousel.Caption className={`${styles.txtBg}`}>
+          <h3>Rick And Morty</h3>
+          <p>
+            <a href="https://rickandmortyapi.com/" target="_blank">See the original API</a>
+          </p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
@@ -29,9 +33,11 @@ function Home() {
           alt="Third slide"
         />
 
-        <Carousel.Caption>
-          <h3>Episodes</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <Carousel.Caption className={`${styles.txtBg}`}>
+          <h3>Rick And Morty</h3>
+          <p>
+            <a href="https://rickandmortyapi.com/" target="_blank">See the original API</a>
+          </p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
@@ -41,10 +47,10 @@ function Home() {
           alt="Third slide"
         />
 
-        <Carousel.Caption>
-          <h3>Locations</h3>
+        <Carousel.Caption className={`${styles.txtBg}`}>
+          <h3>Rick And Morty</h3>
           <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+            <a href="https://rickandmortyapi.com/" target="_blank">See the original API</a>
           </p>
         </Carousel.Caption>
       </Carousel.Item>
