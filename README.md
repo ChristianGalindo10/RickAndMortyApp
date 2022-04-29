@@ -58,6 +58,8 @@ npm run build
 npm run server
 ```
 
+Con la ayuda de Netlify se hace el despliegue en [hosting](https://rick-and-morty-app-cg-jo.netlify.app/)
+
 ## Herramientas
 
 Este proyecto está construido con
