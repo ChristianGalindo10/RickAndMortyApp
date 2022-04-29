@@ -51,7 +51,6 @@ docker logs -f rick-app
 
 Puedes con construir el sitio con el comando `npm run build` y luego correr un servidor estático local con `npm run server`, éste estará corriendo en [localhost:5000/](localhost:5000/)
 
-**_Más adelante se agregarán opciones de despliegue en hosting!_**
 
 ```
 npm run build
